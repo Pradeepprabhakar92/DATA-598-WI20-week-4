@@ -1,0 +1,61 @@
+---
+title: "DATA-598-WI20-week4"
+author: "Pradeep Prabhakar"
+date: "`r format(Sys.time(),'%d %B, %Y')`"
+output:
+  tufte::tufte_html: default
+  word_document: default
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,output_format = "all") })
+bibliography: [barba2018.bib,Ram2013.bib]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,include = TRUE,warning = FALSE, message = FALSE)
+knitr::read_chunk("starwars.R")
+```
+
+
+Loading the tidyverse library:
+```{r}
+library(tidyverse)
+```
+
+
+We are using the Starwars dataset, which has `r dim(starwars)[1]` rows and `r dim(starwars)[2]` columns.
+
+
+A scatterplot of mass and height of humans in starwars:
+```{r, starwars-plot,fig.cap = "A ggplot of starwars stuff"}
+starwars %>%
+  filter(species == "Human")%>% ggplot()+aes(x=height,y=mass)+geom_point()
+```
+
+
+
+A table containing key attributes of humans in starwars:
+```{r starwars-tbl, cache=TRUE}
+starwars%>%
+  filter(species == "Human")%>%
+  select(name,height,mass,homeworld)%>%
+  knitr::kable(caption = "A knitr kable table of starwars data")
+
+```
+
+
+
+
+Using the external Rscript code to print the summary of numeric columns in the starwars data
+```{r, print-starwars-summary,echo=FALSE}
+
+```
+
+
+In-text citations:
+
+[@barba2018terminologies] in the article "Terminologies for reproducible research" attempts to inventory the contradictory definitions for reproducibility vs replicability across various disciplines.
+
+[@ram2013git] in the article "Git can facilitate greater reproducibility and increased transparency in science" talks about the power of Git through some use cases.
+
+## References cited
+
